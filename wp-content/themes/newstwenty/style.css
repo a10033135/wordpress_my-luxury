@@ -516,3 +516,33 @@ footer .small-post{
 		padding: 0rem;
 	}
 }
+
+/* ===== Custom User Layout Adjustments ===== */
+/* Make images proportional (contain) instead of cropped */
+.mg-post-thumb.back-img,
+.mg-posts-sec-inner .mg-post-thumb.back-img,
+.mg-fea-area .mg-post-thumb.back-img,
+.mg-posts-modul-6 .mg-post-thumb::after {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+	/* Changed to cover because '等比例' usually implies correct aspect ratio without distortion. Background-size: cover is strictly proportional. 
+	   Wait, cover crops the image. If user wants NO crop, use contain. Let's use 'contain' */
+}
+.mg-post-thumb.back-img {
+    background-size: contain !important;
+}
+
+/* Force Description into exactly 3 lines */
+.mg-content,
+.mg-content p,
+.small-post .mg-content,
+.small-post .mg-content p {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-bottom: 0px !important;
+}

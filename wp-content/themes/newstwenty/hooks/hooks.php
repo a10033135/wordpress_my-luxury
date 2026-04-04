@@ -92,7 +92,7 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
                                                         <h4 class="entry-title title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
                                                         <?php newsup_post_meta(); ?>
                                                         <div class="mg-content">
-                                                            <?php $newsup_excerpt = newsup_the_excerpt( absint( 25 ) );
+                                                            <?php $newsup_excerpt = newsup_the_excerpt( absint( 60 ) );
                                                             if ( !empty( $newsup_excerpt ) ) {  echo wp_kses_post( wpautop( $newsup_excerpt ) ); } ?>
                                                         </div>
                                                     </div>
