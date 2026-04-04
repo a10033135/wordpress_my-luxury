@@ -518,31 +518,88 @@ footer .small-post{
 }
 
 /* ===== Custom User Layout Adjustments ===== */
-/* Make images proportional (cover) and 1:1 square */
-.mg-post-thumb.back-img,
-.mg-posts-sec-inner .mg-post-thumb.back-img,
-.mg-fea-area .mg-post-thumb.back-img,
-.mg-posts-modul-6 .mg-post-thumb::after {
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-.mg-post-thumb.back-img {
-    aspect-ratio: 1 / 1 !important;
-    height: auto !important;
-    min-height: unset !important;
+
+/* ============================================
+   SLIDER BANNER (mg-fea-area)
+   圖片寬度 50%、高度伸展填滿、摘要最多 3 行
+   ============================================ */
+
+/* 圖片欄：寬度改為 50%，高度跟著文字欄伸展 */
+@media(min-width: 768px) {
+    .mg-fea-area .mg-posts-sec-post > .col-12.col-md-6 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        padding: 0 !important;
+        align-self: stretch !important;
+    }
 }
 
-/* Force Description into exactly 3 lines */
-.mg-content,
-.mg-content p,
-.small-post .mg-content,
-.small-post .mg-content p {
+/* 圖片：填滿欄位全高，最低 350px */
+.mg-fea-area .mg-posts-sec-post .mg-post-thumb.back-img {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 350px !important;
+    padding-top: 0 !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* 摘要：最多三行 */
+.mg-fea-area .mg-posts-sec-post .mg-content p {
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important;
     line-clamp: 3 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    margin-bottom: 0px !important;
+    margin-bottom: 0 !important;
+}
+
+/* 作者區塊置底 */
+.mg-fea-area .mg-posts-sec-post .mg-sec-top-post .mg-blog-meta {
+    margin-top: auto !important;
+}
+
+/* ============================================
+   首頁文章區塊 (mg-posts-modul-6)
+   圖片 1:1 正方形、文字欄伸展、作者置底
+   ============================================ */
+
+/* 圖片欄：高度由圖片自決，不被 row 拉伸 */
+.mg-posts-sec-inner .mg-posts-sec-post > .col-12 {
+    height: auto !important;
+    align-self: flex-start !important;
+    padding: 0 !important;
+}
+
+/* 圖片：1:1 正方形（padding-top trick） */
+.mg-posts-modul-6 .mg-posts-sec-post .mg-post-thumb.back-img {
+    height: 0 !important;
+    padding-top: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* 文字欄：伸展至卡片全高 */
+.mg-posts-modul-6 .mg-posts-sec-post {
+    align-items: stretch !important;
+}
+
+/* 摘要：最多三行 */
+.mg-posts-modul-6 .mg-sec-top-post .mg-content p {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-bottom: 0 !important;
+}
+
+/* 作者區塊置底 */
+.mg-posts-modul-6 .mg-sec-top-post .mg-blog-meta {
+    margin-top: auto !important;
 }
