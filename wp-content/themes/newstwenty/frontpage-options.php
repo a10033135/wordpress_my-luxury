@@ -75,6 +75,38 @@ function newstwenty_customize_register($wp_customize) {
         'input_attrs' => array('min' => 1, 'max' => 10, 'step' => 1),
     ));
 
+    // Slide Banner 圖片最大寬度（px）
+    $wp_customize->add_setting('banner_image_max_width', array(
+        'default'           => 480,
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('banner_image_max_width', array(
+        'type'            => 'number',
+        'label'           => esc_html__('Slide Banner - 圖片最大寬度 (px)', 'newstwenty'),
+        'section'         => 'frontpage_main_banner_section_settings',
+        'settings'        => 'banner_image_max_width',
+        'priority'        => 77,
+        'input_attrs'     => array('min' => 100, 'max' => 1200, 'step' => 10),
+        'active_callback' => 'newsup_main_banner_section_status',
+    ));
+
+    // Slide Banner 圖片最大高度（px）
+    $wp_customize->add_setting('banner_image_max_height', array(
+        'default'           => 480,
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('banner_image_max_height', array(
+        'type'            => 'number',
+        'label'           => esc_html__('Slide Banner - 圖片最大高度 (px)', 'newstwenty'),
+        'section'         => 'frontpage_main_banner_section_settings',
+        'settings'        => 'banner_image_max_height',
+        'priority'        => 77,
+        'input_attrs'     => array('min' => 100, 'max' => 1200, 'step' => 10),
+        'active_callback' => 'newsup_main_banner_section_status',
+    ));
+
     // Banner image display type (separate from article blocks)
     $wp_customize->add_setting('banner_image_type', array(
         'default'           => 'newsup_post_img_hei',

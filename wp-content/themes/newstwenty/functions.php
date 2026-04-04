@@ -80,6 +80,23 @@ add_filter( 'theme_mod_header_textcolor', function() {
     return '171717';
 });
 
+// 動態輸出 Slider Banner 圖片尺寸 CSS 變數
+function newstwenty_banner_image_size_css() {
+    $width  = absint(get_theme_mod('banner_image_max_width', 480));
+    $height = absint(get_theme_mod('banner_image_max_height', 480));
+    if ($width < 1)  $width  = 480;
+    if ($height < 1) $height = 480;
+    ?>
+    <style id="newstwenty-banner-image-size">
+        :root {
+            --banner-img-width:  <?php echo $width; ?>px;
+            --banner-img-height: <?php echo $height; ?>px;
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'newstwenty_banner_image_size_css', 98);
+
 // 動態輸出摘要行數 CSS（根據後台設定）
 // 使用 wp_head 確保在樣式載入後輸出，避免 wp_add_inline_style handle 未註冊的問題
 function newstwenty_excerpt_lines_css() {

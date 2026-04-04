@@ -531,10 +531,10 @@ footer .small-post{
         gap: 0 !important;
     }
 
-    /* FixHeight：圖片欄最多 480px，文字欄填滿剩餘寬度 */
+    /* FixHeight：圖片欄最多 var(--banner-img-width)，文字欄填滿剩餘寬度 */
     .mg-fea-area .mg-posts-sec-post > .col-12.col-md-6:has(.mg-post-thumb.back-img) {
-        flex: 0 0 480px !important;
-        max-width: 480px !important;
+        flex: 0 0 var(--banner-img-width, 480px) !important;
+        max-width: var(--banner-img-width, 480px) !important;
         padding: 0 !important;
         align-self: flex-start !important;
     }
@@ -566,11 +566,11 @@ footer .small-post{
     }
 }
 
-/* FixHeight 圖片：最多 480x480 */
+/* FixHeight 圖片：尺寸由 CSS 變數控制，預設 480x480 */
 .mg-fea-area .mg-posts-sec-post .mg-post-thumb.back-img {
     width: 100% !important;
-    height: 480px !important;
-    max-height: 480px !important;
+    height: var(--banner-img-height, 480px) !important;
+    max-height: var(--banner-img-height, 480px) !important;
     min-height: 0 !important;
     padding-top: 0 !important;
     background-size: cover !important;
