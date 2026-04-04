@@ -45,6 +45,36 @@ function newstwenty_customize_register($wp_customize) {
         )
     );
 
+    // Slide Banner 摘要行數
+    $wp_customize->add_setting('banner_excerpt_lines', array(
+        'default'           => 3,
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('banner_excerpt_lines', array(
+        'type'            => 'number',
+        'label'           => esc_html__('Slide Banner - 內容摘要顯示行數', 'newstwenty'),
+        'section'         => 'frontpage_main_banner_section_settings',
+        'settings'        => 'banner_excerpt_lines',
+        'priority'        => 78,
+        'input_attrs'     => array('min' => 1, 'max' => 10, 'step' => 1),
+        'active_callback' => 'newsup_main_banner_section_status',
+    ));
+
+    // 首頁文章區塊 摘要行數
+    $wp_customize->add_setting('article_excerpt_lines', array(
+        'default'           => 3,
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('article_excerpt_lines', array(
+        'type'        => 'number',
+        'label'       => esc_html__('首頁文章區塊 - 內容摘要顯示行數', 'newstwenty'),
+        'section'     => 'post_image_options',
+        'settings'    => 'article_excerpt_lines',
+        'input_attrs' => array('min' => 1, 'max' => 10, 'step' => 1),
+    ));
+
     // Banner image display type (separate from article blocks)
     $wp_customize->add_setting('banner_image_type', array(
         'default'           => 'newsup_post_img_hei',

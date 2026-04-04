@@ -79,3 +79,31 @@ add_action( 'widgets_init', 'newstwenty_widgets_init' );
 add_filter( 'theme_mod_header_textcolor', function() {
     return '171717';
 });
+
+// 動態輸出摘要行數 CSS（根據後台設定）
+// 使用 wp_head 確保在樣式載入後輸出，避免 wp_add_inline_style handle 未註冊的問題
+function newstwenty_excerpt_lines_css() {
+    $banner_lines  = absint(get_theme_mod('banner_excerpt_lines', 3));
+    $article_lines = absint(get_theme_mod('article_excerpt_lines', 3));
+    ?>
+    <style id="newstwenty-excerpt-lines">
+        .mg-fea-area .mg-posts-sec-post .mg-content p {
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-line-clamp: <?php echo $banner_lines; ?> !important;
+            line-clamp: <?php echo $banner_lines; ?> !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+        .mg-posts-modul-6 .mg-sec-top-post .mg-content p {
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-line-clamp: <?php echo $article_lines; ?> !important;
+            line-clamp: <?php echo $article_lines; ?> !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+    </style>
+    <?php
+}
+add_action('wp_head', 'newstwenty_excerpt_lines_css', 99);
