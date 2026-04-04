@@ -69,7 +69,11 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
                     <div class="overlay">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-9">
+                                <?php
+                                $show_trending = get_theme_mod('newstwenty_show_trending_post_section', false);
+                                $col_class = $show_trending ? 'col-md-9' : 'col-md-12';
+                                ?>
+                                <div class="<?php echo esc_attr($col_class); ?>">
                                     <div id="homemain"class="homemain owl-carousel">                                         
                                     <?php
                                         $newsup_slider_category = newsup_get_option('select_slider_news_category');
@@ -103,7 +107,7 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
                                         ?>
                                     </div>
                                 </div>
-                                <?php do_action('newstwenty_action_banner_trending_posts'); ?>
+                                <?php if ($show_trending) { do_action('newstwenty_action_banner_trending_posts'); } ?>
                             </div>
                         </div>
                     </div>

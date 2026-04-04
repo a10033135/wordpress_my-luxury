@@ -44,5 +44,23 @@ function newstwenty_customize_register($wp_customize) {
             )
         )
     );
+
+    // Dynamic toggle for Trending Post Section
+    $wp_customize->add_setting('newstwenty_show_trending_post_section',
+        array(
+            'default'           => false,
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'newsup_sanitize_checkbox',
+        )
+    );
+    $wp_customize->add_control('newstwenty_show_trending_post_section',
+        array(
+            'label'           => esc_html__('Enable Trending Post Section', 'newstwenty'),
+            'section'         => 'frontpage_main_banner_section_settings',
+            'type'            => 'checkbox',
+            'priority'        => 81,
+            'active_callback' => 'newsup_main_banner_section_status'
+        )
+    );
 }
 add_action('customize_register', 'newstwenty_customize_register');
