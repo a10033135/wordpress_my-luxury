@@ -16,7 +16,36 @@ if ( ! function_exists( 'newstwenty_enqueue_styles' ) ) :
 		if(is_rtl()){
 		wp_enqueue_style( 'newsup_style_rtl', trailingslashit( get_template_directory_uri() ) . 'style-rtl.css' );
 	    }
-		
+
+		// 動態 CSS：緊接在 newstwenty-style 之後輸出，確保覆寫靜態值
+		$img_width     = max( 1, absint( get_theme_mod( 'banner_image_max_width',  480 ) ) );
+		$img_height    = max( 1, absint( get_theme_mod( 'banner_image_max_height', 480 ) ) );
+		$banner_lines  = max( 1, absint( get_theme_mod( 'banner_excerpt_lines',      3 ) ) );
+		$article_lines = max( 1, absint( get_theme_mod( 'article_excerpt_lines',     3 ) ) );
+
+		$dynamic_css = "
+			@media(min-width: 768px) {
+				.mg-fea-area .mg-posts-sec-post > .col-12.col-md-6:has(.mg-post-thumb.back-img) {
+					flex-grow: 0 !important;
+					flex-shrink: 0 !important;
+					flex-basis: {$img_width}px !important;
+					max-width: {$img_width}px !important;
+				}
+			}
+			.mg-fea-area .mg-posts-sec-post .mg-post-thumb.back-img {
+				height: {$img_height}px !important;
+				max-height: {$img_height}px !important;
+			}
+			.mg-fea-area .mg-posts-sec-post .mg-content p {
+				-webkit-line-clamp: {$banner_lines} !important;
+				line-clamp: {$banner_lines} !important;
+			}
+			.mg-posts-modul-6 .mg-sec-top-post .mg-content p {
+				-webkit-line-clamp: {$article_lines} !important;
+				line-clamp: {$article_lines} !important;
+			}
+		";
+		wp_add_inline_style( 'newstwenty-style', $dynamic_css );
 	}
 
 endif;
@@ -80,47 +109,3 @@ add_filter( 'theme_mod_header_textcolor', function() {
     return '171717';
 });
 
-// 動態輸出 Slider Banner 圖片尺寸 CSS 變數
-function newstwenty_banner_image_size_css() {
-    $width  = absint(get_theme_mod('banner_image_max_width', 480));
-    $height = absint(get_theme_mod('banner_image_max_height', 480));
-    if ($width < 1)  $width  = 480;
-    if ($height < 1) $height = 480;
-    ?>
-    <style id="newstwenty-banner-image-size">
-        :root {
-            --banner-img-width:  <?php echo $width; ?>px;
-            --banner-img-height: <?php echo $height; ?>px;
-        }
-    </style>
-    <?php
-}
-add_action('wp_head', 'newstwenty_banner_image_size_css', 98);
-
-// 動態輸出摘要行數 CSS（根據後台設定）
-// 使用 wp_head 確保在樣式載入後輸出，避免 wp_add_inline_style handle 未註冊的問題
-function newstwenty_excerpt_lines_css() {
-    $banner_lines  = absint(get_theme_mod('banner_excerpt_lines', 3));
-    $article_lines = absint(get_theme_mod('article_excerpt_lines', 3));
-    ?>
-    <style id="newstwenty-excerpt-lines">
-        .mg-fea-area .mg-posts-sec-post .mg-content p {
-            display: -webkit-box !important;
-            -webkit-box-orient: vertical !important;
-            -webkit-line-clamp: <?php echo $banner_lines; ?> !important;
-            line-clamp: <?php echo $banner_lines; ?> !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-        }
-        .mg-posts-modul-6 .mg-sec-top-post .mg-content p {
-            display: -webkit-box !important;
-            -webkit-box-orient: vertical !important;
-            -webkit-line-clamp: <?php echo $article_lines; ?> !important;
-            line-clamp: <?php echo $article_lines; ?> !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-        }
-    </style>
-    <?php
-}
-add_action('wp_head', 'newstwenty_excerpt_lines_css', 99);
