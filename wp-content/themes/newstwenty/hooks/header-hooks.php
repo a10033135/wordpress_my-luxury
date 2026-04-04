@@ -113,7 +113,7 @@ if (!function_exists('newstwenty_header_menus_section')) :
                 <?php do_action('newsup_action_header_search'); do_action('newsup_action_header_subscribe'); ?>
             </div>
             <!-- /Right nav --> 
-            <div class="collapse navbar-collapse justify-content-lg-center" id="navbar-wp">
+            <div class="collapse navbar-collapse justify-content-lg-start" id="navbar-wp">
                 <div class="d-md-block">
                 <?php  
                     wp_nav_menu( array(

@@ -37,9 +37,9 @@
             $newsup_header_overlay_color = get_theme_mod('newsup_header_overlay_color','#f9f9f9');?> style="background-color:<?php echo esc_attr($newsup_header_overlay_color);?>;" <?php } ?>> 
             <div class="container-fluid">
                 <div class="mg-nav-widget-area">
-                  <div class="row flex-column align-items-center text-center">
-                    <div class="col-md-12 mx-auto">
-                      <div class="navbar-header d-flex flex-column align-items-center">
+                  <div class="row flex-column align-items-start text-left text-start">
+                    <div class="col-md-12">
+                      <div class="navbar-header d-flex flex-column align-items-start">
                         <div class="site-logo">
                           <?php if(get_theme_mod('custom_logo') !== ""){ the_custom_logo(); } ?>
                         </div>
