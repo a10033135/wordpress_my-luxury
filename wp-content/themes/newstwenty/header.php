@@ -37,9 +37,9 @@
             $newsup_header_overlay_color = get_theme_mod('newsup_header_overlay_color','#f9f9f9');?> style="background-color:<?php echo esc_attr($newsup_header_overlay_color);?>;" <?php } ?>> 
             <div class="container-fluid">
                 <div class="mg-nav-widget-area">
-                  <div class="row align-items-center">
-                    <div class="<?php echo esc_attr($newsup_center_logo_title == false ? 'col-md-3 text-center-xs' : 'col-md-12 text-center mx-auto') ?>">
-                      <div class="navbar-header">
+                  <div class="row flex-column align-items-center text-center">
+                    <div class="col-md-12 mx-auto">
+                      <div class="navbar-header d-flex flex-column align-items-center">
                         <div class="site-logo">
                           <?php if(get_theme_mod('custom_logo') !== ""){ the_custom_logo(); } ?>
                         </div>
@@ -53,7 +53,7 @@
                         </div>    
                       </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                     <?php do_action('newstwenty_action_header_menus_section'); ?>
                     </div>
                   </div>
