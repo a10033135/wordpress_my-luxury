@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//wordpress-1609455-6328420.cloudwaysapps.com/main-sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>https://wordpress-1609455-6328420.cloudwaysapps.com/post-sitemap.xml</loc>
+		<lastmod>2026-04-04T09:37:51+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://wordpress-1609455-6328420.cloudwaysapps.com/category-sitemap.xml</loc>
+		<lastmod>2026-04-04T09:37:51+00:00</lastmod>
+	</sitemap>
+</sitemapindex>
