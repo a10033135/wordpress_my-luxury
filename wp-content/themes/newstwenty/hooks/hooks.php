@@ -43,6 +43,35 @@ endif;
 
 add_action('newstwenty_action_banner_trending_posts', 'newstwenty_banner_trending_posts', 10);
 
+// Banner 專用圖片函式，讀取 banner_image_type 設定（與文章區塊的 post_image_type 分開）
+if (!function_exists('newstwenty_banner_image_display_type')) :
+    function newstwenty_banner_image_display_type($post) {
+        $banner_image_type = get_theme_mod('banner_image_type', 'newsup_post_img_hei');
+        $url = newsup_get_freatured_image_url($post->ID, 'newsup-medium');
+        if ($banner_image_type == 'newsup_post_img_hei') {
+            if ($url) { ?>
+            <div class="col-12 col-md-6">
+                <div class="mg-post-thumb back-img md" style="background-image: url('<?php echo esc_url($url); ?>');">
+                    <?php echo newsup_post_format_type($post); ?>
+                    <a class="link-div" href="<?php the_permalink(); ?>"></a>
+                </div>
+            </div>
+            <?php }
+        } elseif ($banner_image_type == 'newsup_post_img_acc') {
+            if (has_post_thumbnail()) { ?>
+            <div class="col-12 col-md-6">
+                <div class="mg-post-thumb img">
+                    <?php echo '<a href="' . esc_url(get_the_permalink()) . '">';
+                    the_post_thumbnail('', array('class' => 'img-responsive'));
+                    echo '</a>'; ?>
+                    <?php echo newsup_post_format_type($post); ?>
+                </div>
+            </div>
+            <?php }
+        }
+    }
+endif;
+
 //Front Page Banner
 if (!function_exists('newstwenty_front_page_banner_section')) :
     /**
@@ -96,7 +125,7 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
                                                             if ( !empty( $newsup_excerpt ) ) {  echo wp_kses_post( wpautop( $newsup_excerpt ) ); } ?>
                                                         </div>
                                                     </div>
-                                                    <?php if(!empty($newsup_url)){ newsup_post_image_display_type($post); }
+                                                    <?php if(!empty($newsup_url)){ newstwenty_banner_image_display_type($post); }
                                                     else { ?> <div class="col-12 col-md-6"><div class="mg-post-thumb back-img md"></div></div> <?php } ?>
                                                 </article>
                                             </div>

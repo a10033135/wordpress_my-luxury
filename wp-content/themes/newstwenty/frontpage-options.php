@@ -45,6 +45,25 @@ function newstwenty_customize_register($wp_customize) {
         )
     );
 
+    // Banner image display type (separate from article blocks)
+    $wp_customize->add_setting('banner_image_type', array(
+        'default'           => 'newsup_post_img_hei',
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'newsup_sanitize_select',
+    ));
+    $wp_customize->add_control('banner_image_type', array(
+        'type'    => 'radio',
+        'label'   => esc_html__('Slide Banner - Post Image display type:', 'newstwenty'),
+        'choices' => array(
+            'newsup_post_img_hei' => esc_html__('Fix Height Post Image', 'newstwenty'),
+            'newsup_post_img_acc' => esc_html__('Auto Height Post Image', 'newstwenty'),
+        ),
+        'section'  => 'frontpage_main_banner_section_settings',
+        'settings' => 'banner_image_type',
+        'priority' => 79,
+        'active_callback' => 'newsup_main_banner_section_status',
+    ));
+
     // Dynamic toggle for Trending Post Section
     $wp_customize->add_setting('newstwenty_show_trending_post_section',
         array(
