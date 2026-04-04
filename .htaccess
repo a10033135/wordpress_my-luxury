@@ -1,0 +1,157 @@
+#Expires headers configuration added by BREEZE WP CACHE plugin
+        # Browser-specific compression rules
+    # Browser cache TTL
+    <IfModule mod_env.c>
+       SetEnv BREEZE_BROWSER_CACHE_ON 1
+    </IfModule>
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        # Images
+        ExpiresByType image/jpg "access plus 1 year"
+        ExpiresByType image/jpeg "access plus 1 year"
+        ExpiresByType image/gif "access plus 1 year"
+        ExpiresByType image/png "access plus 1 year"
+        ExpiresByType image/webp "access plus 1 year"
+        ExpiresByType image/svg+xml "access plus 1 year"
+        ExpiresByType image/x-icon "access plus 1 year"
+        ExpiresByType image/bmp "access plus 1 year"
+    
+        # Video
+        ExpiresByType video/mp4 "access plus 1 year"
+        ExpiresByType video/mpeg "access plus 1 year"
+        ExpiresByType video/ogg "access plus 1 year"
+        ExpiresByType video/webm "access plus 1 year"
+    
+        # Audio
+        ExpiresByType audio/ogg "access plus 1 year"
+    
+        # CSS, JavaScript
+        ExpiresByType text/css "access plus 1 month"
+        ExpiresByType text/javascript "access plus 1 month"
+        ExpiresByType application/javascript "access plus 1 month"
+        ExpiresByType application/x-javascript "access plus 1 month"
+    
+        # Fonts
+        ExpiresByType application/x-font-ttf "access plus 1 year"
+        ExpiresByType application/x-font-woff "access plus 1 year"
+        ExpiresByType application/font-woff2 "access plus 1 year"
+        ExpiresByType font/ttf "access plus 1 year"
+        ExpiresByType font/woff "access plus 1 year"
+        ExpiresByType font/woff2 "access plus 1 year"
+        ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+        ExpiresByType font/eot "access plus 1 year"
+        ExpiresByType font/opentype "access plus 1 year"
+        ExpiresByType application/font-woff "access plus 1 year"
+    
+        # Data interchange
+        ExpiresByType application/xml "access plus 0 seconds"
+        ExpiresByType application/json "access plus 0 seconds"
+        ExpiresByType application/ld+json "access plus 0 seconds"
+        ExpiresByType application/schema+json "access plus 0 seconds"
+        ExpiresByType application/vnd.geo+json "access plus 0 seconds"
+        ExpiresByType text/xml "access plus 0 seconds"
+        ExpiresByType application/rdf+xml "access plus 1 hour"
+    
+        # Manifest files
+        ExpiresByType application/manifest+json "access plus 1 week"
+        ExpiresByType application/x-web-app-manifest+json "access plus 0 seconds"
+        ExpiresByType text/cache-manifest  "access plus 0 seconds"
+    
+       # Favicon
+        ExpiresByType image/vnd.microsoft.icon "access plus 1 week"
+        ExpiresByType image/x-icon "access plus 1 week"
+    
+        # HTML no caching
+        ExpiresByType text/html "access plus 0 seconds"
+    
+        # Feeds
+        ExpiresByType application/rss+xml "access plus 1 hour"
+        ExpiresByType application/atom+xml "access plus 1 hour"
+    
+        # PDF
+        ExpiresByType application/pdf "access plus 1 month"
+    
+       # Other
+       ExpiresByType application/xhtml-xml "access plus 1 month"
+       ExpiresByType application/x-shockwave-flash "access plus 1 month"
+       ExpiresByType text/x-cross-domain-policy "access plus 1 week"
+    
+        # Default
+        ExpiresDefault "access plus 1 month"
+    </IfModule>
+    
+    # Set proper headers for caching
+    <IfModule mod_headers.c>
+        Header append Vary Accept-Encoding
+        # One year for image and font files
+        <FilesMatch "\.(jpg|jpeg|gif|png|ico|svg|webp|ttf|ttc|otf|eot|woff|woff2)$">
+            Header set Cache-Control "max-age=31536000, public"
+        </FilesMatch>
+    
+        # One month for css and js
+        <FilesMatch "\.(css|js)$">
+            Header set Cache-Control "max-age=2592000, public"
+        </FilesMatch>
+    </IfModule>
+#End of expires headers configuration
+# Begin GzipofBreezeWPCache
+<IfModule mod_deflate.c>
+    # Enable GZIP compression for all sites
+         # Enable GZIP compression
+     <IfModule mod_env.c>
+         SetEnv BREEZE_GZIP_ON 1
+     </IfModule>
+     <IfModule mod_setenvif.c>
+         # Handle older browsers that can't handle compression properly
+         BrowserMatch ^Mozilla/4 gzip-only-text/html
+         BrowserMatch ^Mozilla/4\.0[678] no-gzip
+         BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+         BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+     </IfModule>
+     <IfModule mod_headers.c>
+        Header append Vary User-Agent env=!dont-vary
+     </IfModule>
+     AddType x-font/woff .woff
+     AddOutputFilterByType DEFLATE text/plain
+     AddOutputFilterByType DEFLATE text/html
+     AddOutputFilterByType DEFLATE text/xml
+     AddOutputFilterByType DEFLATE text/css
+     AddOutputFilterByType DEFLATE text/javascript
+     AddOutputFilterByType DEFLATE text/vtt
+     AddOutputFilterByType DEFLATE text/x-component
+     AddOutputFilterByType DEFLATE application/xml
+     AddOutputFilterByType DEFLATE application/xhtml+xml
+     AddOutputFilterByType DEFLATE application/rss+xml
+     AddOutputFilterByType DEFLATE application/javascript
+     AddOutputFilterByType DEFLATE application/x-javascript
+     AddOutputFilterByType DEFLATE application/x-httpd-php
+     AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+     AddOutputFilterByType DEFLATE application/atom+xml
+     AddOutputFilterByType DEFLATE application/json
+     AddOutputFilterByType DEFLATE application/ld+json
+     AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+     AddOutputFilterByType DEFLATE application/x-font-ttf
+     AddOutputFilterByType DEFLATE application/x-web-app-manifest+json
+     AddOutputFilterByType DEFLATE application/font-woff2
+     AddOutputFilterByType DEFLATE application/x-font-woff
+     AddOutputFilterByType DEFLATE font/woff
+     AddOutputFilterByType DEFLATE font/opentype
+     AddOutputFilterByType DEFLATE font/ttf
+     AddOutputFilterByType DEFLATE font/eot
+     AddOutputFilterByType DEFLATE font/otf
+     AddOutputFilterByType DEFLATE image/svg+xml
+     AddOutputFilterByType DEFLATE image/x-icon
+     AddOutputFilterByType DEFLATE application/js
+</IfModule>
+# End GzipofBreezeWPCache
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress

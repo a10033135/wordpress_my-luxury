@@ -1,0 +1,74 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: NewsTwenty\n"
+"POT-Creation-Date: 2025-07-10 12:18+0530\n"
+"PO-Revision-Date: 2025-07-10 12:18+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.9\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: frontpage-options.php:35
+msgid "Recent Post Section"
+msgstr ""
+
+#: frontpage-options.php:52
+msgid "Category"
+msgstr ""
+
+#: frontpage-options.php:53
+msgid "Posts to be shown on Recent Posts"
+msgstr ""
+
+#: functions.php:66
+msgid "Sidebar Widget Area"
+msgstr ""
+
+#: functions.php:77
+msgid "Footer Widget Area"
+msgstr ""
+
+#: header.php:22
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:76
+msgid "Toggle navigation"
+msgstr ""
+
+#. Theme Name of the plugin/theme
+msgid "NewsTwenty"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"NewsTwenty a fast, clean, modern-looking Best Responsive News Magazine "
+"WordPress theme. The theme is fully widgetized, so users can manage the "
+"content by using easy to use widgets. NewsTwenty suitable for dynamic news, "
+"newspapers, magazine, publishers, blogs, editors, online and gaming "
+"magazines, newsportals,personal blogs, newspaper, publishing or review "
+"siteand any creative website. NewsTwenty is SEO friendly, WPML,Gutenberg, "
+"translation and RTL ready. Live preview : https://newsup.themeansar.com/"
+"newstwenty/ and documentation at https://docs.themeansar.com/docs/newsup/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Themeansar"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://themeansar.com"
+msgstr ""
