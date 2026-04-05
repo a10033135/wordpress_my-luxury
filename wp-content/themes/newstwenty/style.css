@@ -593,11 +593,7 @@ footer .small-post{
     background-position: center !important;
 }
 
-/* 摘要：高度由後台控制，預設 80px */
-.mg-fea-area .mg-posts-sec-post .mg-content {
-    max-height: 80px !important;
-    overflow: hidden !important;
-}
+/* 摘要：字數由後台控制（PHP 層截字，無需 CSS 裁切） */
 
 /* 作者區塊置底 */
 .mg-fea-area .mg-posts-sec-post .mg-sec-top-post .mg-blog-meta {

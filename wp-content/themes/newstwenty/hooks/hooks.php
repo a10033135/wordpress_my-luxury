@@ -121,7 +121,9 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
                                                         <h4 class="entry-title title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
                                                         <?php newsup_post_meta(); ?>
                                                         <div class="mg-content">
-                                                            <?php $newsup_excerpt = newstwenty_full_text( $post );
+                                                            <?php
+                                                            $words = max( 1, absint( get_theme_mod( 'banner_excerpt_words', 100 ) ) );
+                                                            $newsup_excerpt = newstwenty_full_text( $post, $words );
                                                             if ( !empty( $newsup_excerpt ) ) { echo wp_kses_post( wpautop( $newsup_excerpt ) ); } ?>
                                                         </div>
                                                     </div>

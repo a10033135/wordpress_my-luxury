@@ -99,7 +99,7 @@ wp_add_inline_style('newstwenty-style', $dynamic_css);
 | Slide Banner | `banner_excerpt_height` | 80px | `.mg-fea-area ... .mg-content` max-height |
 | Post Image Settings | `article_image_max_width` | 300px | `.mg-posts-modul-6 ... .col-12.col-md-6:has(.back-img)` flex-basis / max-width |
 | Post Image Settings | `article_image_max_height` | 300px | `.mg-posts-modul-6 ... .mg-post-thumb.back-img` height / max-height |
-| Post Image Settings | `article_excerpt_height` | 80px | `.mg-posts-modul-6 ... .mg-content` max-height |
+| Post Image Settings | `article_excerpt_words` | 100字元 | PHP `newsup_the_excerpt` 截字（中���為字元數） |
 
 ---
 
