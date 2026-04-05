@@ -121,8 +121,8 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
                                                         <h4 class="entry-title title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
                                                         <?php newsup_post_meta(); ?>
                                                         <div class="mg-content">
-                                                            <?php $newsup_excerpt = newsup_the_excerpt( absint( 60 ) );
-                                                            if ( !empty( $newsup_excerpt ) ) {  echo wp_kses_post( wpautop( $newsup_excerpt ) ); } ?>
+                                                            <?php $newsup_excerpt = newstwenty_full_text( $post );
+                                                            if ( !empty( $newsup_excerpt ) ) { echo wp_kses_post( wpautop( $newsup_excerpt ) ); } ?>
                                                         </div>
                                                     </div>
                                                     <?php if(!empty($newsup_url)){ newstwenty_banner_image_display_type($post); }
@@ -148,3 +148,27 @@ if (!function_exists('newstwenty_front_page_banner_section')) :
     }
 endif;
 add_action('newstwenty_action_front_page_main_section_1', 'newstwenty_front_page_banner_section', 40);
+
+// 覆寫父主題的首頁文章列表函式：mg-content 傳遞完整文字，由 CSS max-height 控制可見高度
+if ( ! function_exists( 'newsup_main_list_content' ) ) :
+    function newsup_main_list_content() {
+        global $post;
+        while ( have_posts() ) { the_post(); ?>
+            <article id="post-<?php the_ID(); ?>" <?php post_class( 'd-md-flex mg-posts-sec-post align-items-center' ); ?>>
+                <?php newsup_post_image_display_type( $post ); ?>
+                <div class="mg-sec-top-post py-3 col">
+                    <?php newsup_post_categories(); ?>
+                    <h4 class="entry-title title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                    <?php newsup_post_meta(); ?>
+                    <div class="mg-content">
+                        <?php
+                        $words = max( 1, absint( get_theme_mod( 'article_excerpt_words', 100 ) ) );
+                        $full_text = newstwenty_full_text( $post, $words );
+                        if ( ! empty( $full_text ) ) { echo wp_kses_post( wpautop( $full_text ) ); } ?>
+                    </div>
+                </div>
+            </article>
+        <?php } newsup_page_pagination();
+    }
+endif;
+add_action( 'newsup_action_main_list_content', 'newsup_main_list_content', 40 );

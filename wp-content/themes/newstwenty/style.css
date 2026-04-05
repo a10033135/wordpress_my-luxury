@@ -633,11 +633,7 @@ footer .small-post{
     align-items: stretch !important;
 }
 
-/* 摘要：高度由後台控制，預設 80px */
-.mg-posts-modul-6 .mg-sec-top-post .mg-content {
-    max-height: 80px !important;
-    overflow: hidden !important;
-}
+/* 文章列表摘要：字數由後台控制（PHP 層截字，無需 CSS 裁切） */
 
 /* 作者區塊置底 */
 .mg-posts-modul-6 .mg-sec-top-post .mg-blog-meta {

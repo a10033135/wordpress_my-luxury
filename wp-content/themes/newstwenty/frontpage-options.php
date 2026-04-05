@@ -89,18 +89,18 @@ function newstwenty_customize_register($wp_customize) {
         'input_attrs' => array('min' => 100, 'max' => 800, 'step' => 10),
     ));
 
-    // 首頁文章區塊 摘要最大高度（px）
-    $wp_customize->add_setting('article_excerpt_height', array(
-        'default'           => 80,
+    // 首頁文章區塊 摘要字數（中文環境下為字元數）
+    $wp_customize->add_setting('article_excerpt_words', array(
+        'default'           => 100,
         'capability'        => 'edit_theme_options',
         'sanitize_callback' => 'absint',
     ));
-    $wp_customize->add_control('article_excerpt_height', array(
+    $wp_customize->add_control('article_excerpt_words', array(
         'type'        => 'number',
-        'label'       => esc_html__('首頁文章區塊 - 內容摘要最大高度 (px)', 'newstwenty'),
+        'label'       => esc_html__('首頁文章區塊 - 內容摘要字數（中文約等於字元��）', 'newstwenty'),
         'section'     => 'post_image_options',
-        'settings'    => 'article_excerpt_height',
-        'input_attrs' => array('min' => 20, 'max' => 400, 'step' => 5),
+        'settings'    => 'article_excerpt_words',
+        'input_attrs' => array('min' => 10, 'max' => 800, 'step' => 10),
     ));
 
     // Slide Banner 圖片最大寬度（px）

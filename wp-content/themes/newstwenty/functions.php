@@ -4,6 +4,57 @@
  *
  * @package NewsTwenty
  */
+// 取得純文字內容
+// $length = 0 → 完整文字（Slider Banner 用，由 CSS max-height 控制可見高度）
+// $length > 0 → 截至指定字數（文章列表用，後台可調整）
+function newstwenty_full_text( $post_obj = null, $length = 0 ) {
+	global $post;
+	if ( is_null( $post_obj ) ) {
+		$post_obj = $post;
+	}
+	$content = trim( $post_obj->post_content );
+	if ( empty( $content ) ) {
+		$content = $post_obj->post_excerpt;
+	}
+	$content = preg_replace( '/\s*(&nbsp;|\xA0)\s*/u', ' ', $content );
+	$content = preg_replace( '`\[[^\]]*\]`', '', $content );
+	$content = wp_strip_all_tags( $content );
+	$content = trim( $content );
+	if ( $length > 0 ) {
+		$content = wp_trim_words( $content, $length, '&hellip;' );
+	}
+	return $content;
+}
+
+// 覆寫父主題的摘要函式
+// - 優先使用 post_content（API 的 post_excerpt 可能不完整）
+// - length >= 20（文章型）→ 使用後台 article_excerpt_words 設定
+// - length < 20（側欄/trending 等小元件）→ 保留原本短截斷
+if ( ! function_exists( 'newsup_the_excerpt' ) ) :
+	function newsup_the_excerpt( $length = 0, $post_obj = null ) {
+		global $post;
+		if ( is_null( $post_obj ) ) {
+			$post_obj = $post;
+		}
+		$length = absint( $length );
+		if ( 0 === $length ) {
+			return;
+		}
+		// 文章型用途：改用後台設定的字數（中文 locale 下為字元數）
+		if ( $length >= 20 ) {
+			$length = max( 1, absint( get_theme_mod( 'article_excerpt_words', 100 ) ) );
+		}
+		// 優先使用 post_content；僅在 content 為空時才退回 post_excerpt
+		$source_content = trim( $post_obj->post_content );
+		if ( empty( $source_content ) ) {
+			$source_content = $post_obj->post_excerpt;
+		}
+		$source_content = preg_replace( '/\s*(&nbsp;|\xA0)\s*/u', ' ', $source_content );
+		$source_content = preg_replace( '`\[[^\]]*\]`', '', $source_content );
+		return wp_trim_words( $source_content, $length, '&hellip;' );
+	}
+endif;
+
 if ( ! function_exists( 'newstwenty_enqueue_styles' ) ) :
 	/**
 	 * @since 0.1
@@ -18,12 +69,11 @@ if ( ! function_exists( 'newstwenty_enqueue_styles' ) ) :
 	    }
 
 		// 動態 CSS：緊接在 newstwenty-style 之後輸出，確保覆寫靜態值
-		$img_width             = max( 1, absint( get_theme_mod( 'banner_image_max_width',    480 ) ) );
-		$img_height            = max( 1, absint( get_theme_mod( 'banner_image_max_height',   480 ) ) );
-		$banner_excerpt_height = max( 1, absint( get_theme_mod( 'banner_excerpt_height',      80 ) ) );
-		$article_img_width     = max( 1, absint( get_theme_mod( 'article_image_max_width',   300 ) ) );
-		$article_img_height    = max( 1, absint( get_theme_mod( 'article_image_max_height',  300 ) ) );
-		$article_excerpt_height = max( 1, absint( get_theme_mod( 'article_excerpt_height',    80 ) ) );
+		$img_width             = max( 1, absint( get_theme_mod( 'banner_image_max_width',   480 ) ) );
+		$img_height            = max( 1, absint( get_theme_mod( 'banner_image_max_height',  480 ) ) );
+		$banner_excerpt_height = max( 1, absint( get_theme_mod( 'banner_excerpt_height',     80 ) ) );
+		$article_img_width     = max( 1, absint( get_theme_mod( 'article_image_max_width',  300 ) ) );
+		$article_img_height    = max( 1, absint( get_theme_mod( 'article_image_max_height', 300 ) ) );
 
 		$dynamic_css = "
 			/* Slide Banner 圖片尺寸 */
@@ -55,13 +105,9 @@ if ( ! function_exists( 'newstwenty_enqueue_styles' ) ) :
 				padding-top: 0 !important;
 			}
 
-			/* 摘要高度 */
+			/* Slide Banner 摘要高度 */
 			.mg-fea-area .mg-posts-sec-post .mg-content {
 				max-height: {$banner_excerpt_height}px !important;
-				overflow: hidden !important;
-			}
-			.mg-posts-modul-6 .mg-sec-top-post .mg-content {
-				max-height: {$article_excerpt_height}px !important;
 				overflow: hidden !important;
 			}
 		";
