@@ -61,6 +61,34 @@ function newstwenty_customize_register($wp_customize) {
         'active_callback' => 'newsup_main_banner_section_status',
     ));
 
+    // 首頁文章區塊 圖片最大寬度（px）
+    $wp_customize->add_setting('article_image_max_width', array(
+        'default'           => 300,
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('article_image_max_width', array(
+        'type'        => 'number',
+        'label'       => esc_html__('首頁文章區塊 - 圖片最大寬度 (px)', 'newstwenty'),
+        'section'     => 'post_image_options',
+        'settings'    => 'article_image_max_width',
+        'input_attrs' => array('min' => 100, 'max' => 800, 'step' => 10),
+    ));
+
+    // 首頁文章區塊 圖片最大高度（px）
+    $wp_customize->add_setting('article_image_max_height', array(
+        'default'           => 300,
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('article_image_max_height', array(
+        'type'        => 'number',
+        'label'       => esc_html__('首頁文章區塊 - 圖片最大高度 (px)', 'newstwenty'),
+        'section'     => 'post_image_options',
+        'settings'    => 'article_image_max_height',
+        'input_attrs' => array('min' => 100, 'max' => 800, 'step' => 10),
+    ));
+
     // 首頁文章區塊 摘要行數
     $wp_customize->add_setting('article_excerpt_lines', array(
         'default'           => 3,

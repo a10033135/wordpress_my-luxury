@@ -557,7 +557,7 @@ footer .small-post{
         max-width: 50% !important;
     }
 
-    /* 首頁文章區塊：圖文各佔 50% */
+    /* 首頁文章區塊 AutoHeight：圖文各佔 50% */
     .mg-posts-modul-6 .mg-posts-sec-post > .col-12 {
         flex: 0 0 50% !important;
         max-width: 50% !important;
@@ -565,6 +565,20 @@ footer .small-post{
     .mg-posts-modul-6 .mg-posts-sec-post > .mg-sec-top-post {
         flex: 0 0 50% !important;
         max-width: 50% !important;
+    }
+
+    /* 首頁文章區塊 FixHeight：圖片欄固定寬度，文字欄填滿剩餘 */
+    .mg-posts-modul-6 .mg-posts-sec-post > .col-12.col-md-6:has(.mg-post-thumb.back-img) {
+        flex-grow: 0 !important;
+        flex-shrink: 0 !important;
+        flex-basis: 300px !important;
+        max-width: 300px !important;
+        padding: 0 !important;
+        align-self: flex-start !important;
+    }
+    .mg-posts-modul-6 .mg-posts-sec-post:has(.mg-post-thumb.back-img) > .mg-sec-top-post {
+        flex: 1 1 0 !important;
+        max-width: 100% !important;
     }
 }
 
@@ -607,12 +621,13 @@ footer .small-post{
     padding: 0 !important;
 }
 
-/* 圖片：1:1 正方形（padding-top trick） */
+/* 首頁文章區塊 FixHeight 圖片：預設 300x300，後台動態 CSS 覆寫 */
 .mg-posts-modul-6 .mg-posts-sec-post .mg-post-thumb.back-img {
-    height: 0 !important;
-    padding-top: 100% !important;
-    min-height: 0 !important;
     width: 100% !important;
+    height: 300px !important;
+    max-height: 300px !important;
+    min-height: 0 !important;
+    padding-top: 0 !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
