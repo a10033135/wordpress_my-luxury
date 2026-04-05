@@ -45,19 +45,19 @@ function newstwenty_customize_register($wp_customize) {
         )
     );
 
-    // Slide Banner 摘要行數
-    $wp_customize->add_setting('banner_excerpt_lines', array(
-        'default'           => 3,
+    // Slide Banner 摘要最大高度（px）
+    $wp_customize->add_setting('banner_excerpt_height', array(
+        'default'           => 80,
         'capability'        => 'edit_theme_options',
         'sanitize_callback' => 'absint',
     ));
-    $wp_customize->add_control('banner_excerpt_lines', array(
+    $wp_customize->add_control('banner_excerpt_height', array(
         'type'            => 'number',
-        'label'           => esc_html__('Slide Banner - 內容摘要顯示行數', 'newstwenty'),
+        'label'           => esc_html__('Slide Banner - 內容摘要最大高度 (px)', 'newstwenty'),
         'section'         => 'frontpage_main_banner_section_settings',
-        'settings'        => 'banner_excerpt_lines',
+        'settings'        => 'banner_excerpt_height',
         'priority'        => 78,
-        'input_attrs'     => array('min' => 1, 'max' => 10, 'step' => 1),
+        'input_attrs'     => array('min' => 20, 'max' => 400, 'step' => 5),
         'active_callback' => 'newsup_main_banner_section_status',
     ));
 
@@ -89,18 +89,18 @@ function newstwenty_customize_register($wp_customize) {
         'input_attrs' => array('min' => 100, 'max' => 800, 'step' => 10),
     ));
 
-    // 首頁文章區塊 摘要行數
-    $wp_customize->add_setting('article_excerpt_lines', array(
-        'default'           => 3,
+    // 首頁文章區塊 摘要最大高度（px）
+    $wp_customize->add_setting('article_excerpt_height', array(
+        'default'           => 80,
         'capability'        => 'edit_theme_options',
         'sanitize_callback' => 'absint',
     ));
-    $wp_customize->add_control('article_excerpt_lines', array(
+    $wp_customize->add_control('article_excerpt_height', array(
         'type'        => 'number',
-        'label'       => esc_html__('首頁文章區塊 - 內容摘要顯示行數', 'newstwenty'),
+        'label'       => esc_html__('首頁文章區塊 - 內容摘要最大高度 (px)', 'newstwenty'),
         'section'     => 'post_image_options',
-        'settings'    => 'article_excerpt_lines',
-        'input_attrs' => array('min' => 1, 'max' => 10, 'step' => 1),
+        'settings'    => 'article_excerpt_height',
+        'input_attrs' => array('min' => 20, 'max' => 400, 'step' => 5),
     ));
 
     // Slide Banner 圖片最大寬度（px）

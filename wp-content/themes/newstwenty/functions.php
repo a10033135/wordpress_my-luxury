@@ -18,12 +18,12 @@ if ( ! function_exists( 'newstwenty_enqueue_styles' ) ) :
 	    }
 
 		// 動態 CSS：緊接在 newstwenty-style 之後輸出，確保覆寫靜態值
-		$img_width          = max( 1, absint( get_theme_mod( 'banner_image_max_width',   480 ) ) );
-		$img_height         = max( 1, absint( get_theme_mod( 'banner_image_max_height',  480 ) ) );
-		$banner_lines       = max( 1, absint( get_theme_mod( 'banner_excerpt_lines',       3 ) ) );
-		$article_img_width  = max( 1, absint( get_theme_mod( 'article_image_max_width',  300 ) ) );
-		$article_img_height = max( 1, absint( get_theme_mod( 'article_image_max_height', 300 ) ) );
-		$article_lines      = max( 1, absint( get_theme_mod( 'article_excerpt_lines',      3 ) ) );
+		$img_width             = max( 1, absint( get_theme_mod( 'banner_image_max_width',    480 ) ) );
+		$img_height            = max( 1, absint( get_theme_mod( 'banner_image_max_height',   480 ) ) );
+		$banner_excerpt_height = max( 1, absint( get_theme_mod( 'banner_excerpt_height',      80 ) ) );
+		$article_img_width     = max( 1, absint( get_theme_mod( 'article_image_max_width',   300 ) ) );
+		$article_img_height    = max( 1, absint( get_theme_mod( 'article_image_max_height',  300 ) ) );
+		$article_excerpt_height = max( 1, absint( get_theme_mod( 'article_excerpt_height',    80 ) ) );
 
 		$dynamic_css = "
 			/* Slide Banner 圖片尺寸 */
@@ -55,14 +55,14 @@ if ( ! function_exists( 'newstwenty_enqueue_styles' ) ) :
 				padding-top: 0 !important;
 			}
 
-			/* 摘要行數 */
-			.mg-fea-area .mg-posts-sec-post .mg-content p {
-				-webkit-line-clamp: {$banner_lines} !important;
-				line-clamp: {$banner_lines} !important;
+			/* 摘要高度 */
+			.mg-fea-area .mg-posts-sec-post .mg-content {
+				max-height: {$banner_excerpt_height}px !important;
+				overflow: hidden !important;
 			}
-			.mg-posts-modul-6 .mg-sec-top-post .mg-content p {
-				-webkit-line-clamp: {$article_lines} !important;
-				line-clamp: {$article_lines} !important;
+			.mg-posts-modul-6 .mg-sec-top-post .mg-content {
+				max-height: {$article_excerpt_height}px !important;
+				overflow: hidden !important;
 			}
 		";
 		wp_add_inline_style( 'newstwenty-style', $dynamic_css );

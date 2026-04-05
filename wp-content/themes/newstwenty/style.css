@@ -593,15 +593,10 @@ footer .small-post{
     background-position: center !important;
 }
 
-/* 摘要：最多三行 */
-.mg-fea-area .mg-posts-sec-post .mg-content p {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
-    line-clamp: 3 !important;
-    -webkit-box-orient: vertical !important;
+/* 摘要：高度由後台控制，預設 80px */
+.mg-fea-area .mg-posts-sec-post .mg-content {
+    max-height: 80px !important;
     overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    margin-bottom: 0 !important;
 }
 
 /* 作者區塊置底 */
@@ -638,15 +633,10 @@ footer .small-post{
     align-items: stretch !important;
 }
 
-/* 摘要：最多三行 */
-.mg-posts-modul-6 .mg-sec-top-post .mg-content p {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
-    line-clamp: 3 !important;
-    -webkit-box-orient: vertical !important;
+/* 摘要：高度由後台控制，預設 80px */
+.mg-posts-modul-6 .mg-sec-top-post .mg-content {
+    max-height: 80px !important;
     overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    margin-bottom: 0 !important;
 }
 
 /* 作者區塊置底 */
